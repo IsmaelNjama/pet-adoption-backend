@@ -1,4 +1,5 @@
 require("dotenv").config();
+require("./utils/mongodb").run();
 const express = require("express");
 
 const PORT = process.env.PORT || 8080;
@@ -20,12 +21,23 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post("/signup", (req, res) => {
-  res.send("Welcome");
-});
+//routes
 
-app.post("/login", (req, res) => {
-  res.send("Welcome back");
+app.use("/auth", require("./routes/auth.routes"));
+
+app.use("/users", require("./routes/users.route"));
+
+//error handler
+app.use((err, req, res, next) => {
+  try {
+    const [statusCode, msg] = err;
+    res.status(statusCode).send({
+      error: true,
+      message: msg,
+    });
+  } catch (error) {
+    res.status(500).send(error);
+  }
 });
 
 app.listen(PORT, () => console.log(`listening.... on port ${PORT}`));
