@@ -1,3 +1,5 @@
+const { ObjectId } = require("mongodb");
+
 const users = require("../utils/mongodb").users;
 
 const services = {
@@ -15,6 +17,13 @@ const services = {
   getUserByEmail: async (email) => {
     const user = await users().findOne({ email });
     return user;
+  },
+  getUserById: async (id) => {
+    const user = await users().findOne({ _id: new ObjectId(id) });
+    return user;
+  },
+  deleteById: async (id) => {
+    await users().deleteOne({ _id: new ObjectId(id) });
   },
 };
 

@@ -13,4 +13,15 @@ module.exports = {
       });
     });
   },
+  validatePassword: (password, hash) => {
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(password, hash, (err, result) => {
+        if (err || !result) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    });
+  },
 };
