@@ -8,6 +8,7 @@ module.exports = {
   },
   getById: async (req, res, next) => {
     const { id } = req.params;
+
     try {
       const user = await services.getUserById(id);
       res.send(user);

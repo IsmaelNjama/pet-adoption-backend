@@ -8,8 +8,14 @@ const validate = (schema) => {
     const valid = validate(data);
 
     if (!valid) {
-      console.log(validate.error);
-      return res.status(400).send({ error: validate.error });
+      console.log(validate.errors);
+      const message = validate.errors
+        .map((item) => {
+          return `${item.instancePath.slice(1)}:${item.message}`;
+        })
+        .join(" , ");
+      // return res.status(400).send({ error: validate.errors });
+      return next([400, message]);
     }
     next();
   };

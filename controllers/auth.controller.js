@@ -40,12 +40,13 @@ module.exports = {
       }
 
       await validatePassword(password, user.password);
-      const payload = { id: user._id.toString() };
-      const accessToken = jwt.sign(payload);
 
-      res.send(accessToken);
+      usersService.clearUser(user);
+      const payload = { id: user._id.toString() };
+      const token = jwt.sign(payload);
+
+      res.send({ token, user });
     } catch (error) {
-      console.error(error);
       next(ERR_BAD_REQUEST);
     }
   },

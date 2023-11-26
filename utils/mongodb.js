@@ -26,7 +26,7 @@ module.exports = {
   users: () => {
     return db.collection("users");
   },
-  // books: () => {
-  //   return db.collection("books");
-  // },
+  pets: () => {
+    return db.collection("pets");
+  },
 };

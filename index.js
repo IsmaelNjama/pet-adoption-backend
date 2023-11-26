@@ -53,6 +53,8 @@ app.use("/auth", require("./routes/auth.routes"));
 
 app.use("/users", require("./routes/users.route"));
 
+app.use("/pets", require("./routes/pets.route"));
+
 //error handler
 app.use((err, req, res, next) => {
   try {

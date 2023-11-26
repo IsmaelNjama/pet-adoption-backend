@@ -10,6 +10,9 @@ const services = {
   addNormalizedUser: async (body, hash) => {
     return await services.addUser({ ...body, password: hash });
   },
+  clearUser: (user) => {
+    delete user.password;
+  },
   getAllUsers: async () => {
     const usersList = await users().find({}).toArray();
     return usersList;
