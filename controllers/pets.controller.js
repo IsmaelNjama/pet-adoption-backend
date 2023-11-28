@@ -32,6 +32,25 @@ module.exports = {
       next(error);
     }
   },
+  getByBasicQuery: async (req, res, next) => {
+    const { q } = req.query;
+    try {
+      const petsList = await petsService.getPetsByBasicQuery(q);
+      res.send(petsList);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  getByAdvancedQuery: async (req, res, next) => {
+    const { q } = req.query;
+    try {
+      const petsList = await petsService.getPetsByAdvancedQuery(q);
+      res.send(petsList);
+    } catch (error) {
+      next(error);
+    }
+  },
 
   deletePetById: async (req, res, next) => {
     const { id } = req.params;

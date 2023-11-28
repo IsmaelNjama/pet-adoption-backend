@@ -33,6 +33,43 @@ const services = {
       }
     });
   },
+  getPetsByBasicQuery: (q) => {
+    const query = new RegExp(q, "i");
+    return new Promise(async (resolve, reject) => {
+      try {
+        const petsByBasicQuery = await pets()
+          .find({ type: { $regex: query } })
+          .toArray();
+        resolve(petsByBasicQuery);
+      } catch (error) {
+        console.log(error);
+        reject(error);
+      }
+    });
+  },
+
+  getPetsByAdvancedQuery: (q) => {
+    const query = new RegExp(q, "i");
+    return new Promise(async (resolve, reject) => {
+      try {
+        const petsByAdvancedQuery = await pets()
+          .find({
+            $or: [
+              { adoption_status: query },
+              { height: query },
+              { weight: query },
+              { type: query },
+              { name: query },
+            ],
+          })
+          .toArray();
+        resolve(petsByAdvancedQuery);
+      } catch (error) {
+        console.log(error);
+        reject(error);
+      }
+    });
+  },
 
   deletePetById: (id) => {
     return new Promise(async (resolve, reject) => {
