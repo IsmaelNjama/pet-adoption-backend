@@ -1,4 +1,5 @@
 const petsService = require("../services/pets.service");
+const { ERR_NOT_FOUND } = require("../utils/error");
 
 module.exports = {
   addPet: async (req, res, next) => {
@@ -49,6 +50,30 @@ module.exports = {
       res.send(petsList);
     } catch (error) {
       next(error);
+    }
+  },
+
+  adoptPet: async (req, res, next) => {
+    const { id } = req.params;
+    console.log("🚀 ~ file: pets.controller.js:58 ~ adoptPet: ~ id:", id);
+
+    const { adoptionStatus } = req.body;
+    console.log(
+      "🚀 ~ file: pets.controller.js:59 ~ adoptPet: ~ adoption_status:",
+      adoptionStatus
+    );
+
+    try {
+      if (adoptionStatus === "available") {
+        const pet = await petsService.getPetByStatus(adoptionStatus, id);
+        console.log("🚀 ~ file: pets.controller.js:63 ~ adoptPet: ~ pet:", pet);
+
+        res.send(pet);
+      } else {
+        next(ERR_NOT_FOUND);
+      }
+    } catch (error) {
+      console.error(error);
     }
   },
 

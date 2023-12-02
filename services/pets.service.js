@@ -33,6 +33,21 @@ const services = {
       }
     });
   },
+
+  getPetByStatus: (adoptionStatus, id) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const pet = await pets().findOne({
+          adoptionStatus,
+          _id: new ObjectId(id),
+        });
+        resolve(pet);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  },
+
   getPetsByBasicQuery: (q) => {
     const query = new RegExp(q, "i");
     return new Promise(async (resolve, reject) => {
@@ -55,7 +70,7 @@ const services = {
         const petsByAdvancedQuery = await pets()
           .find({
             $or: [
-              { adoption_status: query },
+              { adoptionStatus: query },
               { height: query },
               { weight: query },
               { type: query },

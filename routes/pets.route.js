@@ -6,6 +6,7 @@ router.post("/", petsController.addPet);
 router.get("/", petsController.getPets);
 router.get("/search/basic", petsController.getByBasicQuery);
 router.get("/search/advanced", petsController.getByAdvancedQuery);
+router.post("/adopt/:id", petsController.adoptPet);
 router.get("/:id", petsController.getPetById);
 
 router.delete("/:id", petsController.deletePetById);

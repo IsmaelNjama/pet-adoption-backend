@@ -21,10 +21,21 @@ const services = {
     const user = await users().findOne({ email });
     return user;
   },
+
   getUserById: async (id) => {
     const user = await users().findOne({ _id: new ObjectId(id) });
     return user;
   },
+
+  updateUser: async (id, body) => {
+    const user = await users().updateOne(
+      { _id: new ObjectId(id) },
+      { $set: body }
+    );
+    console.log(user);
+    return user;
+  },
+
   deleteById: async (id) => {
     await users().deleteOne({ _id: new ObjectId(id) });
   },
