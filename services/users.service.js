@@ -13,8 +13,10 @@ const services = {
   clearUser: (user) => {
     delete user.password;
   },
+
   getAllUsers: async () => {
     const usersList = await users().find({}).toArray();
+
     return usersList;
   },
   getUserByEmail: async (email) => {
@@ -32,7 +34,7 @@ const services = {
       { _id: new ObjectId(id) },
       { $set: body }
     );
-    console.log(user);
+
     return user;
   },
 

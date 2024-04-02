@@ -57,7 +57,6 @@ const services = {
           .toArray();
         resolve(petsByBasicQuery);
       } catch (error) {
-        console.log(error);
         reject(error);
       }
     });
@@ -80,7 +79,20 @@ const services = {
           .toArray();
         resolve(petsByAdvancedQuery);
       } catch (error) {
-        console.log(error);
+        reject(error);
+      }
+    });
+  },
+
+  updatePet: async (id, body) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const pet = await pets().updateOne(
+          { _id: new ObjectId(id) },
+          { $set: body }
+        );
+        resolve(pet);
+      } catch (error) {
         reject(error);
       }
     });

@@ -20,12 +20,10 @@ module.exports = {
 
       const hash = await hashPassword(password);
 
-      // console.log(newUserBody);
       const newUser = await usersService.addNormalizedUser(req.body, hash);
 
       res.send(newUser);
     } catch (error) {
-      console.log(error);
       next(ERR);
     }
   },

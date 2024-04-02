@@ -8,7 +8,6 @@ const validate = (schema) => {
     const valid = validate(data);
 
     if (!valid) {
-      console.log(validate.errors);
       const message = validate.errors
         .map((item) => {
           return `${item.instancePath.slice(1)}:${item.message}`;

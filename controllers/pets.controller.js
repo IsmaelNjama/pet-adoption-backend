@@ -8,7 +8,6 @@ module.exports = {
 
       res.send(pet.insertedId);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   },
@@ -29,7 +28,6 @@ module.exports = {
       const petById = await petsService.getPetById(id);
       res.send(petById);
     } catch (error) {
-      console.log(error);
       next(error);
     }
   },
@@ -47,6 +45,7 @@ module.exports = {
     const { q } = req.query;
     try {
       const petsList = await petsService.getPetsByAdvancedQuery(q);
+
       res.send(petsList);
     } catch (error) {
       next(error);
@@ -55,18 +54,12 @@ module.exports = {
 
   adoptPet: async (req, res, next) => {
     const { id } = req.params;
-    console.log("🚀 ~ file: pets.controller.js:58 ~ adoptPet: ~ id:", id);
 
     const { adoptionStatus } = req.body;
-    console.log(
-      "🚀 ~ file: pets.controller.js:59 ~ adoptPet: ~ adoption_status:",
-      adoptionStatus
-    );
 
     try {
-      if (adoptionStatus === "available") {
+      if (adoptionStatus === "available" || adoptionStatus == "fostered") {
         const pet = await petsService.getPetByStatus(adoptionStatus, id);
-        console.log("🚀 ~ file: pets.controller.js:63 ~ adoptPet: ~ pet:", pet);
 
         res.send(pet);
       } else {
@@ -74,6 +67,34 @@ module.exports = {
       }
     } catch (error) {
       console.error(error);
+    }
+  },
+
+  fosterPet: async (req, res, next) => {
+    const { id } = req.params;
+    const { adoptionStatus } = req.body;
+
+    try {
+      if (adoptionStatus === "available" || adoptionStatus === "adopted") {
+        const pet = await petsService.getPetByStatus(adoptionStatus, id);
+
+        res.send(pet);
+      } else {
+        next(ERR_NOT_FOUND);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
+  updatePet: async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      const petAdopted = await petsService.updatePet(id, req.body);
+      res.send(petAdopted);
+    } catch (error) {
+      console.error(error);
+      next(error);
     }
   },
 
