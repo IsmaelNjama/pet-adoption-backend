@@ -24,6 +24,7 @@ app.use(async (req, res, next) => {
     { method: "POST", url: "/auth/signup" },
     { method: "POST", url: "/auth/login" },
     { method: "GET", url: "/pets/search/basic" },
+    { method: "GET", url: "/pets/firstThreePets" },
   ];
 
   const isPublicRoute = publicRoutes.find(

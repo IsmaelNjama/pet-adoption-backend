@@ -107,4 +107,13 @@ module.exports = {
       next(error);
     }
   },
+
+  getTheFirstThreePets: async (req, res, next) => {
+    try {
+      const firstThreePets = await petsService.getFirstThreePets();
+      res.send(firstThreePets);
+    } catch (error) {
+      next(error);
+    }
+  },
 };

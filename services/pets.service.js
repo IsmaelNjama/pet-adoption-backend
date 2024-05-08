@@ -108,6 +108,17 @@ const services = {
       }
     });
   },
+
+  getFirstThreePets: () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const firstThreePets = await pets().find({}).limit(3).toArray();
+        resolve(firstThreePets);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  },
 };
 
 module.exports = services;
