@@ -16,7 +16,7 @@ async function run() {
     await client.connect();
     db = client.db("PetAdoptionBackend", { ping: 1 });
 
-    console.log("You successfully connected to MongoDB!");
+    console.log("Successfully connected to MongoDB!");
   } catch (error) {
     console.error("Error", error);
   }
