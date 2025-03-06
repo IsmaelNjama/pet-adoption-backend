@@ -39,7 +39,7 @@ async function run() {
         strict: true,
         deprecationErrors: true,
       },
-      // Add these options for better reliability
+      // Options for better reliability
       connectTimeoutMS: 5000,
       socketTimeoutMS: 45000,
       maxPoolSize: 50,
