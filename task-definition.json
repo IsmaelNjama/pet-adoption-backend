@@ -1,95 +1,54 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:us-east-1:198968105483:task-definition/task-definition:1",
-  "containerDefinitions": [
-      {
-          "name": "pet-adoption-api",
-          "image": "198968105483.dkr.ecr.us-east-1.amazonaws.com/pet_backend:latest",
-          "cpu": 0,
-          "portMappings": [
-              {
-                  "name": "container-port",
-                  "containerPort": 5050,
-                  "hostPort": 5050,
-                  "protocol": "tcp",
-                  "appProtocol": "http"
-              }
-          ],
-          "essential": true,
-          "environment": [],
-          "environmentFiles": [],
-          "mountPoints": [],
-          "volumesFrom": [],
-          "ulimits": [],
-          "logConfiguration": {
-              "logDriver": "awslogs",
-              "options": {
-                  "awslogs-group": "/ecs/task-definition",
-                  "mode": "non-blocking",
-                  "awslogs-create-group": "true",
-                  "max-buffer-size": "25m",
-                  "awslogs-region": "us-east-1",
-                  "awslogs-stream-prefix": "ecs"
-              },
-              "secretOptions": []
-          },
-          "systemControls": []
-      }
-  ],
-  "family": "task-definition",
-  "taskRoleArn": "arn:aws:iam::198968105483:role/ecsTaskExecutionRole",
-  "executionRoleArn": "arn:aws:iam::198968105483:role/ecsTaskExecutionRole",
-  "networkMode": "awsvpc",
-  "revision": 1,
-  "volumes": [],
-  "status": "ACTIVE",
-  "requiresAttributes": [
-      {
-          "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
-      },
-      {
-          "name": "ecs.capability.execution-role-awslogs"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.ecr-auth"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.28"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.task-iam-role"
-      },
-      {
-          "name": "ecs.capability.execution-role-ecr-pull"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
-      },
-      {
-          "name": "ecs.capability.task-eni"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
-      }
-  ],
-  "placementConstraints": [],
-  "compatibilities": [
-      "EC2",
-      "FARGATE"
-  ],
-  "requiresCompatibilities": [
-      "FARGATE"
-  ],
-  "cpu": "1024",
-  "memory": "3072",
-  "runtimePlatform": {
-      "cpuArchitecture": "X86_64",
-      "operatingSystemFamily": "LINUX"
-  },
-  "registeredAt": "2025-02-05T20:18:30.358Z",
-  "registeredBy": "arn:aws:sts::198968105483:assumed-role/AWSReservedSSO_AdministratorAccess_ab9f96ddf0032a52/Isma",
-  "enableFaultInjection": false,
-  "tags": []
+    "family": "my-task",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": ["FARGATE"],
+    "cpu": "256",
+    "memory": "512",
+    "executionRoleArn": "arn:aws:iam::198968105483:role/ecsTaskExecutionRole",
+    "taskRoleArn": "arn:aws:iam::198968105483:role/ecsTaskRole",
+    "containerDefinitions": [
+        {
+            "name": "my-container",
+            "image": "198968105483.dkr.ecr.us-east-1.amazonaws.com/pet_backend:a486b9306e45e03207291536f33eff66b8c67210",
+            "memory": 512,
+            "cpu": 256,
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": 80,
+                    "protocol": "tcp"
+                }
+            ],
+            "secrets": [
+                {
+                    "name": "MONGO_URI",
+                    "valueFrom": "arn:aws:secretsmanager:us-east-1:198968105483:secret:prod/pet-hub/mongodb-uri-qWk0UL"
+                },
+                {
+                    "name": "JWT_SECRET_TOKEN",
+                    "valueFrom": "arn:aws:secretsmanager:us-east-1:198968105483:secret:prod/pet-hub/jwt-secret-IOqwii"
+                }
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/my-task",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            },
+            "environment": [
+                {
+                    "name": "NODE_ENV",
+                    "value": "production"
+                }
+            ],
+            "healthCheck": {
+                "command": ["CMD-SHELL", "curl -f http://localhost/ || exit 0"],
+                "interval": 30,
+                "timeout": 5,
+                "retries": 3
+            }
+        }
+    ]
 }
