@@ -26,6 +26,7 @@ app.use(async (req, res, next) => {
     { method: "POST", url: "/auth/login" },
     { method: "GET", url: "/pets/search/basic" },
     { method: "GET", url: "/pets/firstThreePets" },
+    { method: "GET", url: "/health/" },
   ];
 
   const isPublicRoute = publicRoutes.find(
@@ -51,6 +52,8 @@ app.use(async (req, res, next) => {
 });
 
 //routes
+
+app.use("/health", require("./routes/health.route"));
 
 app.use("/auth", require("./routes/auth.routes"));
 
