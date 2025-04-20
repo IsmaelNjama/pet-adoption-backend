@@ -26,7 +26,7 @@ app.use(async (req, res, next) => {
     { method: "POST", url: "/auth/login" },
     { method: "GET", url: "/pets/search/basic" },
     { method: "GET", url: "/pets/firstThreePets" },
-    { method: "GET", url: "/health/" },
+    { method: "GET", url: /^\/health\/$/ },
   ];
 
   const isPublicRoute = publicRoutes.find(
@@ -74,4 +74,4 @@ app.use((err, req, res, next) => {
   }
 });
 
-app.listen(PORT, () => console.log(`server listening.... on port ${PORT}`));
+app.listen(PORT, () => console.log(`server listening... on port ${PORT}`));
