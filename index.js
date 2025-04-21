@@ -51,7 +51,7 @@ app.use(async (req, res, next) => {
   } catch (error) {
     return next(ERR_UNAUTHORIZED);
   }
-  console.log("The middleware logs!!!!");
+  console.log("The middleware logs!!!");
   next();
 });
 
