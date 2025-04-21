@@ -26,12 +26,16 @@ app.use(async (req, res, next) => {
     { method: "POST", url: "/auth/login" },
     { method: "GET", url: "/pets/search/basic" },
     { method: "GET", url: "/pets/firstThreePets" },
-    { method: "GET", url: /^\/health\/$/ },
+    { method: "GET", url: /^\/health\/?$/ },
   ];
 
-  const isPublicRoute = publicRoutes.find(
-    (endpoint) => req.method === endpoint.method && req.url === endpoint.url
-  );
+  const isPublicRoute = publicRoutes.find((endpoint) => {
+    if (req.method !== endpoint.method) return false;
+    if (endpoint.url instanceof RegExp) {
+      return endpoint.url.test(req.url);
+    }
+    return endpoint.url === req.url;
+  });
   if (isPublicRoute) {
     return next();
   }
