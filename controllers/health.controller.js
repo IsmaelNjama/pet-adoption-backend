@@ -12,7 +12,6 @@ module.exports = {
         const startTime = Date.now();
 
         // Try to get a count from the users collection
-        // This is a lightweight operation to test connectivity
         const usersCollection = mongodb.users();
         await usersCollection.countDocuments();
 
@@ -66,7 +65,6 @@ module.exports = {
   },
 
   // Simple endpoint that always returns OK for basic liveness checks
-  // This can be used by load balancers that just need a 200 response
   livenessCheck: (req, res) => {
     res.status(200).send("OK");
   },
