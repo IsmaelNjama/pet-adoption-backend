@@ -28,6 +28,7 @@ app.use(async (req, res, next) => {
     { method: "GET", url: "/pets/firstThreePets" },
     { method: "GET", url: "/health" },
     { method: "GET", url: "/health/" },
+    { method: "GET", url: "/health/liveness" },
   ];
 
   const isPublicRoute = publicRoutes.find((endpoint) => {
