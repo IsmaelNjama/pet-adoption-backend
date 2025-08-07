@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/home/njama/pet-hub/pet-adoption-backend/logs/.7cff5f1f5d7cfbafe34d8b54433d8c3232bfc365-audit.json",
+    "files": [
+        {
+            "date": 1754596236462,
+            "name": "/home/njama/pet-hub/pet-adoption-backend/logs/2025-08-07-combined.log",
+            "hash": "d4a95414e9d3a718dd78344c765e1d7e5e53726af5437c1d30e261e50a67966e"
+        }
+    ],
+    "hashType": "sha256"
+}

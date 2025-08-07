@@ -1,4 +1,5 @@
 const { MongoClient, ServerApiVersion } = require("mongodb");
+const logger = require("./logger");
 
 // Initialize connection variables
 let client;
@@ -10,8 +11,8 @@ async function run() {
     const secretString = process.env.MONGO_URI;
 
     // Debug logging (without exposing sensitive data)
-    console.log("MongoDB connection attempt starting...");
-    console.log("URI exists:", !!secretString);
+    logger.info("MongoDB connection attempt starting...");
+    logger.info("URI exists:", !!secretString);
 
     // Parse the URI if it's in JSON format
     let uri;
