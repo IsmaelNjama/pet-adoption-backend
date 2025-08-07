@@ -1,6 +1,0 @@
-{"level":"info","message":"MongoDB connection attempt starting...","service":"pet-service","timestamp":"2025-08-07T19:50:36.465Z"}
-{"level":"info","message":"URI exists:","service":"pet-service","timestamp":"2025-08-07T19:50:36.468Z"}
-{"env":"development","level":"info","message":"Server running on port 8080","port":"8080","service":"pet-service","timestamp":"2025-08-07T19:50:36.913Z"}
-{"level":"info","message":"MongoDB connection attempt starting...","service":"pet-service","timestamp":"2025-08-07T19:58:23.925Z"}
-{"level":"info","message":"URI exists:","service":"pet-service","timestamp":"2025-08-07T19:58:23.941Z"}
-{"env":"development","level":"info","message":"Server running on port 8080","port":"8080","service":"pet-service","timestamp":"2025-08-07T19:58:25.058Z"}
