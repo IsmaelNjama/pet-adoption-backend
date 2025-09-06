@@ -1,10 +1,30 @@
-FROM node:20-alpine
+FROM node:20-alpine AS base
+
+# Create app user and group
+RUN addgroup -g 1001 -S appgroup && \
+    adduser -S appuser -u 1001 -G appgroup
+
+# Set working directory
 WORKDIR /app
-COPY package.json /app
 
+# Copy package files and set ownership
+COPY --chown=appuser:appgroup package*.json ./
+
+# Development stage
+FROM base AS development
 RUN npm install
-
-COPY . /app
+USER appuser
+COPY --chown=appuser:appgroup . .
 EXPOSE 8080
+CMD [ "node", "index.js" ]
 
-CMD [ "node","index.js" ]
+# Production stage
+FROM base AS production
+RUN npm ci --only=production
+USER appuser
+COPY --chown=appuser:appgroup . .
+EXPOSE 8080
+CMD ["node", "index.js"]
+
+
+
