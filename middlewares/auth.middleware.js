@@ -24,7 +24,17 @@ module.exports = async (req, res, next) => {
     return next();
   }
   const { authorization: token } = req.headers;
-
+  // const authHeader = req.headers.authorization;
+  // let token;
+  // if (authHeader && typeof authHeader === "string") {
+  //   // Support for Bearer token
+  //   const parts = authHeader.split(" ");
+  //   if (parts.length === 2 && parts[0] === "Bearer") {
+  //     token = parts[1];
+  //   } else {
+  //     token = authHeader;
+  //   }
+  // }
   if (!token) {
     return next(ERR_UNAUTHORIZED);
   }

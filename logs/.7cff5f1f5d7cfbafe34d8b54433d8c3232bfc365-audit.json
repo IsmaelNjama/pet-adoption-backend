@@ -9,6 +9,11 @@
             "date": 1756755437598,
             "name": "/home/njama/pet-hub/pet-adoption-backend/logs/2025-09-01-combined.log",
             "hash": "7f3184718514527028b6060b40ea832a7fc5f45a949ede9db01cd88d95ba7e60"
+        },
+        {
+            "date": 1756760632713,
+            "name": "/home/njama/pet-hub/pet-adoption-backend/logs/2025-09-02-combined.log",
+            "hash": "493ccd346c495f6be52a5e632afb56a1f6ea945390a8a3b974c6e2be310d184e"
         }
     ],
     "hashType": "sha256"
